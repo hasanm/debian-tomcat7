@@ -152,7 +152,7 @@ catalina_sh() {
 	set +e
 	touch "$CATALINA_PID" "$CATALINA_BASE"/logs/catalina.out
 	chown $TOMCAT7_USER "$CATALINA_PID" "$CATALINA_BASE"/logs/catalina.out
-	start-stop-daemon --start -b -u "$TOMCAT7_USER" -g "$TOMCAT7_GROUP" \
+	start-stop-daemon --start --pidfile "$CATALINA_PID" -b -u "$TOMCAT7_USER" -g "$TOMCAT7_GROUP" \
 		-c "$TOMCAT7_USER" -d "$CATALINA_TMPDIR" \
 		-x /bin/bash -- -c "$AUTHBIND_COMMAND $TOMCAT_SH"
 	status="$?"
